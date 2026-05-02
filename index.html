@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>May Queen Ball – Agra Club 1863</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dark: #8B6914;
+    --deep-plum: #1A0A2E;
+    --plum: #2D1060;
+    --violet: #4A1A8C;
+    --rose: #C2185B;
+    --rose-light: #F06292;
+    --cream: #FFF8E7;
+    --white: #FFFFFF;
+    --glass: rgba(255,255,255,0.07);
+    --border: rgba(201,168,76,0.35);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background: var(--deep-plum);
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(74,26,140,0.7) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 90% 80%, rgba(194,24,91,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 10% 90%, rgba(201,168,76,0.15) 0%, transparent 60%);
+    font-family: 'EB Garamond', serif;
+    color: var(--cream);
+    padding: 40px 20px 80px;
+    overflow-x: hidden;
+  }
+
+  /* Floating particles */
+  .particles {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    width: 4px; height: 4px;
+    background: var(--gold-light);
+    border-radius: 50%;
+    opacity: 0;
+    animation: float-up linear infinite;
+  }
+  @keyframes float-up {
+    0% { opacity: 0; transform: translateY(100vh) scale(0); }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { opacity: 0; transform: translateY(-10vh) scale(1.5); }
+  }
+
+  .container {
+    position: relative; z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeDown 0.9s ease both;
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .crown-icon {
+    font-size: 52px;
+    display: block;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 18px rgba(201,168,76,0.8));
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+  @keyframes glow-pulse {
+    0%,100% { filter: drop-shadow(0 0 18px rgba(201,168,76,0.8)); }
+    50%      { filter: drop-shadow(0 0 32px rgba(232,201,122,1)); }
+  }
+
+  .club-name {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    opacity: 0.85;
+  }
+
+  .divider {
+    display: flex; align-items: center; gap: 12px;
+    margin: 14px auto 18px;
+    max-width: 400px;
+  }
+  .divider-line {
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .divider-diamond {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  h1 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: clamp(28px, 7vw, 52px);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 40%, var(--rose-light) 70%, var(--gold-light) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shine 4s linear infinite;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  @keyframes shine {
+    to { background-position: 200% center; }
+  }
+
+  .subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    color: var(--gold-light);
+    letter-spacing: 2px;
+    opacity: 0.9;
+  }
+
+  .deadline-badge {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 8px 24px;
+    background: linear-gradient(135deg, var(--rose) 0%, #8B0B40 100%);
+    border-radius: 40px;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(194,24,91,0.5);
+    animation: pulse-badge 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse-badge {
+    0%,100% { box-shadow: 0 0 20px rgba(194,24,91,0.5); }
+    50%      { box-shadow: 0 0 35px rgba(194,24,91,0.85); }
+  }
+
+  /* CARD */
+  .card {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 48px 52px;
+    box-shadow:
+      0 30px 80px rgba(0,0,0,0.5),
+      inset 0 1px 0 rgba(201,168,76,0.2);
+    animation: fadeUp 1s ease 0.3s both;
+    position: relative;
+    overflow: hidden;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--rose-light), var(--gold), transparent);
+    animation: shimmer 3s ease infinite;
+  }
+  @keyframes shimmer {
+    0%,100% { opacity: 0.7; }
+    50%      { opacity: 1; }
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* FORM FIELDS */
+  .field {
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .field:nth-child(1) { animation-delay: 0.4s; }
+  .field:nth-child(2) { animation-delay: 0.5s; }
+  .field:nth-child(3) { animation-delay: 0.6s; }
+  .field:nth-child(4) { animation-delay: 0.7s; }
+  .field:nth-child(5) { animation-delay: 0.8s; }
+  .field:nth-child(6) { animation-delay: 0.9s; }
+
+  label {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  label span.req { color: var(--rose-light); margin-left: 4px; }
+
+  input[type="text"],
+  input[type="tel"],
+  input[type="number"],
+  textarea,
+  select {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-family: 'EB Garamond', serif;
+    font-size: 17px;
+    color: var(--cream);
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+    -webkit-appearance: none;
+  }
+  input::placeholder, textarea::placeholder { color: rgba(255,248,231,0.3); }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.08);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.15), 0 0 20px rgba(201,168,76,0.1);
+  }
+
+  select option { background: var(--plum); color: var(--cream); }
+
+  .field-hint {
+    font-size: 13px;
+    color: rgba(255,248,231,0.45);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* RADIO GROUP */
+  .radio-group {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .radio-option {
+    display: flex; align-items: center; gap: 10px;
+    cursor: pointer;
+    padding: 12px 20px;
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 10px;
+    transition: border-color 0.25s, background 0.25s;
+    flex: 1; min-width: 120px;
+  }
+  .radio-option:hover {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.08);
+  }
+  .radio-option input[type="radio"] { display: none; }
+  .radio-option input[type="radio"]:checked + .radio-dot { background: var(--gold); box-shadow: 0 0 8px var(--gold); }
+  .radio-option input[type="radio"]:checked ~ .radio-label { color: var(--gold-light); }
+  .radio-option:has(input:checked) { border-color: var(--gold); background: rgba(201,168,76,0.1); }
+
+  .radio-dot {
+    width: 14px; height: 14px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .radio-label {
+    font-family: 'EB Garamond', serif;
+    font-size: 16px;
+    color: var(--cream);
+    transition: color 0.2s;
+  }
+
+  /* CHECKBOX */
+  .checkbox-wrapper {
+    display: flex; gap: 14px; align-items: flex-start;
+    margin-top: 4px;
+    cursor: pointer;
+  }
+  .checkbox-wrapper input[type="checkbox"] { display: none; }
+  .custom-checkbox {
+    width: 20px; height: 20px;
+    border: 2px solid var(--gold);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+    font-size: 13px;
+    color: var(--deep-plum);
+  }
+  .checkbox-wrapper input:checked + .custom-checkbox {
+    background: var(--gold);
+  }
+  .checkbox-text {
+    font-family: 'EB Garamond', serif;
+    font-size: 15px;
+    color: rgba(255,248,231,0.85);
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* SEPARATOR */
+  .sep {
+    margin: 36px 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+  }
+
+  /* SUBMIT */
+  .submit-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 40%, var(--gold-light) 60%, var(--gold) 100%);
+    background-size: 200% auto;
+    color: var(--deep-plum);
+    border: none;
+    border-radius: 12px;
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-position 0.4s, box-shadow 0.3s, transform 0.15s;
+    box-shadow: 0 6px 30px rgba(201,168,76,0.4);
+    margin-top: 8px;
+  }
+  .submit-btn:hover {
+    background-position: right center;
+    box-shadow: 0 10px 40px rgba(201,168,76,0.65);
+    transform: translateY(-2px);
+  }
+  .submit-btn:active { transform: translateY(0); }
+
+  /* SUCCESS */
+  .success-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(10,3,25,0.92);
+    backdrop-filter: blur(12px);
+    align-items: center; justify-content: center;
+    flex-direction: column; text-align: center; padding: 30px;
+  }
+  .success-overlay.show { display: flex; animation: fadeIn 0.5s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .success-icon { font-size: 70px; margin-bottom: 20px; animation: bounce 0.6s ease; }
+  @keyframes bounce {
+    0% { transform: scale(0); }
+    60% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+  .success-title {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 28px;
+    color: var(--gold-light);
+    margin-bottom: 12px;
+  }
+  .success-msg {
+    font-size: 18px;
+    color: rgba(255,248,231,0.8);
+    max-width: 400px;
+    line-height: 1.7;
+  }
+
+  /* T&C BOX */
+  .tc-box {
+    background: rgba(201,168,76,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 28px;
+  }
+  .tc-box h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .tc-box ol {
+    padding-left: 20px;
+    color: rgba(255,248,231,0.75);
+    font-size: 15px;
+    line-height: 2;
+  }
+  .tc-box li { margin-bottom: 2px; }
+
+  .age-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(194,24,91,0.3), rgba(194,24,91,0.1));
+    border: 1px solid rgba(194,24,91,0.5);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: var(--rose-light);
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+    display: inline-block;
+  }
+
+  .footer-note {
+    text-align: center;
+    margin-top: 36px;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(201,168,76,0.5);
+  }
+
+  @media (max-width: 600px) {
+    .card { padding: 32px 22px; }
+    .radio-group { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Particles -->
+<div class="particles" id="particles"></div>
+
+<!-- Success Overlay -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-icon">👑</div>
+  <div class="success-title">Entry Submitted!</div>
+  <p class="success-msg">Your entry for the May Queen Ball has been received. We look forward to seeing you at Agra Club!</p>
+</div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <span class="crown-icon">👑</span>
+    <div class="club-name">Agra Club &nbsp;·&nbsp; Estd. 1863</div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-diamond"></div>
+      <div class="divider-line"></div>
+    </div>
+    <h1>May Queen Ball</h1>
+    <div class="subtitle">Club Queen &nbsp;·&nbsp; Club Shehzadi &nbsp;·&nbsp; Club Princess</div>
+    <div class="deadline-badge">⏳ &nbsp; Last Date of Entry: 13th May 2026</div>
+  </div>
+
+  <!-- FORM CARD -->
+  <div class="card">
+    <form id="entryForm" novalidate>
+
+      <div class="section-title">✦ &nbsp; Participant Information</div>
+
+      <div class="field">
+        <label>1. Name of Participant <span class="req">*</span></label>
+        <input type="text" name="name" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="field">
+        <label>2. Father's / Husband's Name <span class="req">*</span></label>
+        <input type="text" name="guardian" placeholder="Enter father's or husband's name" required>
+      </div>
+
+      <div class="field">
+        <label>3. Membership No.</label>
+        <input type="text" name="membership" placeholder="Your Agra Club membership number (if applicable)">
+        <div class="field-hint">Leave blank if you are a guest participant.</div>
+      </div>
+
+      <div class="field">
+        <label>4. Address <span class="req">*</span></label>
+        <textarea name="address" rows="3" placeholder="Enter your full address" required></textarea>
+      </div>
+
+      <div class="field">
+        <label>5. Telephone / Mobile No. <span class="req">*</span></label>
+        <input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required>
+      </div>
+
+      <div class="field">
+        <label>6. Category you are applying for <span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="category" value="Club Queen" required>
+            <div class="radio-dot"></div>
+            <span class="radio-label">👑 Club Queen</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="category" value="Club Shehzadi">
+            <div class="radio-dot"></div>
+            <span class="radio-label">🌸 Club Shehzadi</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="category" value="Club Princess">
+            <div class="radio-dot"></div>
+            <span class="radio-label">✨ Club Princess</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>7. Name of Host Member <span style="color:rgba(255,248,231,0.4); font-size:10px;">(For Guest Participants Only)</span></label>
+        <input type="text" name="hostMember" placeholder="Name of Agra Club member hosting you">
+      </div>
+
+      <div class="sep"></div>
+
+      <!-- T&C -->
+      <div class="section-title">✦ &nbsp; Terms & Conditions</div>
+      <span class="age-badge">Minimum Age: 16 Years &amp; Above</span>
+
+      <div class="tc-box">
+        <h3>Please read before submitting</h3>
+        <ol>
+          <li>Last date of Form Submission is <strong>13th May 2026</strong>.</li>
+          <li>Competition is open for Members of Agra Club &amp; Open for All.</li>
+          <li>Workshop will be provided to Selected Participants after Audition.</li>
+          <li>Participant must carry their own attire.</li>
+          <li>Rules must be followed in the workshop, otherwise you may be disqualified from the competition.</li>
+        </ol>
+      </div>
+
+      <div class="field">
+        <label class="checkbox-wrapper" for="agreeCheck">
+          <input type="checkbox" id="agreeCheck" name="agree" required>
+          <div class="custom-checkbox" id="checkBox">✓</div>
+          <span class="checkbox-text">
+            I have read the rules and agree to abide by them. I also understand that the decision of the judges will be final and I will not have the right to object.
+          </span>
+        </label>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        ✦ &nbsp; Submit My Entry &nbsp; ✦
+      </button>
+
+    </form>
+  </div>
+
+  <div class="footer-note">
+    All Rights Reserved &nbsp;·&nbsp; Agra Club Agra &nbsp;·&nbsp; Est. 1863
+    <br><br>
+    Developed by &nbsp;✦&nbsp; Vogue Productions
+  </div>
+
+</div>
+
+<script>
+  // Particles
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 28; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.width = p.style.height = (Math.random() * 4 + 2) + 'px';
+    p.style.animationDuration = (Math.random() * 12 + 8) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.opacity = Math.random() * 0.5 + 0.1;
+    container.appendChild(p);
+  }
+
+  // Checkbox visual
+  const chk = document.getElementById('agreeCheck');
+  const box = document.getElementById('checkBox');
+  chk.addEventListener('change', () => {
+    box.style.display = chk.checked ? 'flex' : 'flex';
+  });
+
+  // Form submit
+  document.getElementById('entryForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = this;
+
+    // Basic validation
+    const name = form.name.value.trim();
+    const guardian = form.guardian.value.trim();
+    const membership = form.membership.value.trim();
+    const address = form.address.value.trim();
+    const phone = form.phone.value.trim();
+    const category = form.querySelector('input[name="category"]:checked');
+    const agree = form.agree.checked;
+
+    if (!name || !guardian || !address || !phone || !category || !agree) {
+      alert('Please fill in all required fields and agree to the Terms & Conditions.');
+      return;
+    }
+
+    // Show loading state
+    const btn = form.querySelector('.submit-btn');
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+
+    // Send to Google Sheets
+    fetch('https://script.google.com/macros/s/AKfycbwZSBtXQleW5PlacikXtUSojzYYyb6V_TYI7VrRXGuPCc7OpvrbwbxYlX3pspjy6dSM/exec', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: name,
+        guardian: guardian,
+        membership: membership,
+        address: address,
+        phone: phone,
+        category: category.value
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('successOverlay').classList.add('show');
+      form.reset();
+      btn.textContent = '✦ \u00a0 Submit My Entry \u00a0 ✦';
+      btn.disabled = false;
+      setTimeout(() => {
+        document.getElementById('successOverlay').classList.remove('show');
+      }, 4500);
+    })
+    .catch(error => {
+      alert('Submission failed. Please try again!');
+      btn.textContent = '✦ \u00a0 Submit My Entry \u00a0 ✦';
+      btn.disabled = false;
+    });
+  });
+</script>
+</body>
+</html>
