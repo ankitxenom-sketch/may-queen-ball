@@ -1,0 +1,29 @@
+.main-logo {
+  width: 200px;
+  max-width: 80%;
+  display: block;
+  margin: 0 auto 15px;
+  filter: drop-shadow(0 10px 25px rgba(0,0,0,0.6));
+}
+.main-logo {
+  width: 220px;
+  max-width: 85%;
+  display: block;
+  margin: 0 auto 18px;
+  filter: drop-shadow(0 12px 30px rgba(201,168,76,0.45));
+  animation: logoFloat 3.5s ease-in-out infinite, logoGlow 2.8s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes logoGlow {
+  0%, 100% {
+    filter: drop-shadow(0 10px 24px rgba(201,168,76,0.35));
+  }
+  50% {
+    filter: drop-shadow(0 16px 38px rgba(232,201,122,0.75));
+  }
+}
